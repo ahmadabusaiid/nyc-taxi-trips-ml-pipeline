@@ -3,5 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-#virtual env
+# virtual env
 venv/
+
+# airflow
+logs/
+plugins/
+data/
+
+# extra
+test2.ipynb

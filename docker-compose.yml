@@ -1,7 +1,8 @@
 version: '3'
 services:
   airflow-init:
-    image: apache/airflow:latest
+    # image: apache/airflow:latest
+    build: .
     container_name: airflow_init
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -10,11 +11,13 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
     command: >
       bash -c "airflow db init && airflow users create --username admin --password password --firstname Admin --lastname User --role Admin --email admin@example.com"
 
   airflow-webserver:
-    image: apache/airflow:latest
+    # image: apache/airflow:latest
+    build: .
     container_name: airflow_webserver
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -28,13 +31,15 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
     depends_on:
       - postgres
     command: >
       airflow webserver
 
   airflow-scheduler:
-    image: apache/airflow:latest
+    # image: apache/airflow:latest
+    build: .
     container_name: airflow_scheduler
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -43,6 +48,7 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data
     depends_on:
       - postgres
     command: >

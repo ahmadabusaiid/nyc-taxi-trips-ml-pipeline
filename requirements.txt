@@ -1,4 +1,7 @@
 numpy
 pandas
 requests
-apache-airflow
+# apache-airflow
+pyarrow
+duckdb
+ipykernel
